@@ -12,6 +12,6 @@ public class Graph {
     
     public void addWordToGraph(String wordToBeAdded) {
 
-    }
+    }   
 }
 
