@@ -1,6 +1,6 @@
 /**
  * @author Chris Savill - chs17
- * @title Class that contains various methods to read lines
+ * @title Class that contains various methods to read words from a file
  */
 package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
 
