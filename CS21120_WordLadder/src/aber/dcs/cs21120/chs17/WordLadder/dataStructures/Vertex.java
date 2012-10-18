@@ -11,6 +11,7 @@ public class Vertex {
     private String word;
     private int distanceFromStartVertex = -1;
     private LinkedList<String> neighbours;
+    private String predecessor = null;
     
     public Vertex() {
         
@@ -39,5 +40,13 @@ public class Vertex {
     
     public LinkedList<String> getNeighbours() {
         return this.neighbours;
+    }
+    
+    public String getPredecessor() {
+        return this.predecessor;
+    }
+    
+    public void setPredecessor(String predecessor) {
+        this.predecessor = predecessor;
     }
 }
