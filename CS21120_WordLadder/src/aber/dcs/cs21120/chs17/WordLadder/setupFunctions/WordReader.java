@@ -5,64 +5,72 @@
 package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WordReader {
 
-    public String[] readWords(int wordLength) {
-        int numberOfWords = 1000;
+    public LinkedList<String> readWords(int wordLength) {
+        int numberOfWords = 0;
         int numberOfRelevantWords = 0;
         String wordRead;
-        boolean wordAlreadyStored = true;
+        boolean wordAlreadyStored;
 
         try {
-            BufferedReader fileToBeRead = new BufferedReader(new FileReader("WordList.txt"));
-            String[] wordStore = new String[numberOfWords];
-            String[] wordList;
+            BufferedReader fileToBeRead = new BufferedReader(new FileReader("WordsOfLength" + wordLength + ".dat"));
 
-            for (int counter = 0; counter < numberOfWords; counter++) {
-                wordAlreadyStored = true;
-                try {
-                    wordRead = fileToBeRead.readLine();
-                    if (wordRead.length() == wordLength) {
-                        for (int counter2 = 0; counter2 < numberOfRelevantWords || wordAlreadyStored == true; counter2++) {
-                            if (!wordRead.equals(wordStore[counter2])) {
-                                wordAlreadyStored = false;
-                            }
-                        }
-                        if (wordAlreadyStored == false) {
-                            wordStore[numberOfRelevantWords] = wordRead;
-                            numberOfRelevantWords++;
-                        }
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            while (fileToBeRead.readLine() != null) {
+                numberOfWords++;
             }
 
-            wordList = new String[numberOfRelevantWords];
+            fileToBeRead.close();
 
-            for (int counter = 0; counter < numberOfRelevantWords; counter++) {
-                wordList[counter] = wordStore[counter];
+        } catch (IOException ex) {
+            Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            BufferedReader fileToBeRead = new BufferedReader(new FileReader("WordsOfLength" + wordLength + ".dat"));
+            LinkedList<String> wordStore = new LinkedList();
+
+            for (int counter = 0; counter < numberOfWords; counter++) {
+                if (numberOfRelevantWords == 0) {
+                    try {
+                        wordStore.add(fileToBeRead.readLine());
+                    } catch (IOException ex) {
+                        Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    wordAlreadyStored = false;
+                    try {
+                        wordRead = fileToBeRead.readLine();
+                        if (wordRead.length() == wordLength) {
+                            for (int counter2 = 0; counter2 < numberOfRelevantWords || wordAlreadyStored == true; counter2++) {
+                                if (wordStore.get(counter2).equals(wordRead)) {
+                                    wordAlreadyStored = true;
+                                }
+                            }
+                            if (wordAlreadyStored == false) {
+                                wordStore.add(wordRead);
+                                numberOfRelevantWords++;
+                            }
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
 
             try {
                 fileToBeRead.close();
+                return wordStore;
             } catch (IOException ex) {
                 Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            return wordList;
-
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

@@ -9,6 +9,35 @@ import java.util.LinkedList;
 
 public class Vertex {
     private String word;
-    private int numberOfNeighbours = 0;
+    private int distanceFromStartVertex = -1;
     private LinkedList<String> neighbours;
+    
+    public Vertex() {
+        
+    }
+    
+    public Vertex(String word) {
+        this.word = word;
+        neighbours = new LinkedList();
+    }
+    
+    public String getWord() {
+        return this.word;
+    }
+    
+    public int getDistanceFromStartVertex() {
+        return this.distanceFromStartVertex;
+    }
+    
+    public void setDistanceFromStartVertex(int distanceFromStartVertex) {
+        this.distanceFromStartVertex = distanceFromStartVertex;
+    }
+    
+    public void addNeighbour(String word) {
+        neighbours.add(word);
+    }
+    
+    public LinkedList<String> getNeighbours() {
+        return this.neighbours;
+    }
 }

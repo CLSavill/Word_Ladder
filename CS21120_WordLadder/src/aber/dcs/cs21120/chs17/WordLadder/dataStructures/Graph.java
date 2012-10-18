@@ -6,12 +6,25 @@
 package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
 
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Graph {
-    private Hashtable graphHash;
+    private Hashtable<String, Vertex> graphHash;
+    private Iterator<Map.Entry<String, Vertex>> iterator;
     
-    public void addWordToGraph(String wordToBeAdded) {
-
-    }   
+    public Graph() {
+        graphHash = new Hashtable();
+    }
+    
+    public Hashtable<String, Vertex> getGraphHash() {
+        return graphHash;
+    }
+    
+    public Iterator getHashIterator() {
+        iterator = graphHash.entrySet().iterator();
+        return iterator;
+    }
+    
 }
 
