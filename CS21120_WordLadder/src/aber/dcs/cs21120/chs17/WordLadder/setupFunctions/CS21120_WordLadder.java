@@ -16,7 +16,6 @@ public class CS21120_WordLadder {
     public static void main(String[] args) {
         int menuChoice = 0;
         Scanner input = new Scanner(System.in);
-        Graph graph;
         GenerateLadder generateLadder;
         DiscoverLadder discoverLadder;
         
@@ -33,14 +32,14 @@ public class CS21120_WordLadder {
             
             switch (menuChoice) {
                 case 1:
-                    graph = new Graph();
-                    generateLadder = new GenerateLadder(graph);
+                    Graph generatorGraph = new Graph();
+                    generateLadder = new GenerateLadder(generatorGraph);
                     generateLadder.generateLadder();
                     break;
                 case 2:
-                    graph = new Graph();
-                    //discoverLadder.discoverLadder();
-                    //Discover function
+                    Graph discoveryGraph = new Graph();
+                    discoverLadder = new DiscoverLadder(discoveryGraph);
+                    discoverLadder.discoverLadder();
                     break;
                 case 3:
                     System.out.println("Exiting WordLadder...");

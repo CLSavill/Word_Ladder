@@ -115,9 +115,9 @@ public class GenerateLadder {
                 resultStack.push(currentVertex.getWord());
                 return true;
             } else {
-                for (String neighbours : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
-                    if (graph.getGraphHash().get(neighbours).getDistanceFromStartVertex() < 0) {
-                        result = recursiveDepthLimitedSearchForGeneration(graph.getGraphHash().get(neighbours), currentDepth + 1, depthLimit);
+                for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
+                    if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) {
+                        result = recursiveDepthLimitedSearchForGeneration(graph.getGraphHash().get(neighbour), currentDepth + 1, depthLimit);
                         if (result == true) {
                             resultStack.push(currentVertex.getWord());
                             return true;
@@ -128,26 +128,6 @@ public class GenerateLadder {
         }
         return false;
     }
-
-    /* public boolean iterativeDeepeningSearch(Vertex currentVertex, int maxDepthLimit) {
-     int currentDepthLimit = 0;
-     boolean resultFound = false;
-
-     while (currentDepthLimit < maxDepthLimit) {
-     resultFound = recursiveDepthLimitedSearchForGeneration(currentVertex, 0, currentDepthLimit, maxDepthLimit);
-     if (resultFound == true) {
-     return true;
-     } else {
-     currentDepthLimit++;
-     resultFound = recursiveDepthLimitedSearchForGeneration(currentVertex, 0, currentDepthLimit, maxDepthLimit);
-     }
-     }
-     if (resultFound == false) {
-     return false;
-     } else {
-     return true;
-     }
-     } */
     
     public Stack getResultStack() {
         return this.resultStack;
