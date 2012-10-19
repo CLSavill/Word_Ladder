@@ -35,6 +35,8 @@ public class GenerateLadder {
     /** LinkedList of type String used to store all the words read in by the WordReader class */
     private LinkedList<String> wordList = new LinkedList();
 
+    //////////////////////// Constructors ///////////////////////////
+    
     /**
      * Constructor that takes an instance of the Graph class and sets its graph instantiation to the graph passed in
      * @param graph 

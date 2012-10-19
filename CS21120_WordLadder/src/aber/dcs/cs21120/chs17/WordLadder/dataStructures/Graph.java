@@ -13,6 +13,8 @@ public class Graph {
     private Hashtable<String, Vertex> graphHash;
     private Iterator<Map.Entry<String, Vertex>> iterator;
     
+    //////////////////////// Constructors ///////////////////////////
+    
     public Graph() {
         graphHash = new Hashtable();
     }

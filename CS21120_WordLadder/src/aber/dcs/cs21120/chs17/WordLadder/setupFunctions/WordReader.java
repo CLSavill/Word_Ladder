@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//////////////////////// Constructors ///////////////////////////
+
 public class WordReader {
 
     public LinkedList<String> readWords(int wordLength) {

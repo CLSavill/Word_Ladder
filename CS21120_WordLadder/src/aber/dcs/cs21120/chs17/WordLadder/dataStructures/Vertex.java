@@ -13,6 +13,8 @@ public class Vertex {
     private LinkedList<String> neighbours;
     private String predecessor = null;
     
+    //////////////////////// Constructors ///////////////////////////
+    
     public Vertex() {
         
     }

@@ -14,7 +14,6 @@ import java.util.Stack;
 
 public class DiscoverLadder {
 
-    LinkedList<String> frontier;
     /**
      * Scanner class used for retrieving user input
      */
@@ -67,7 +66,13 @@ public class DiscoverLadder {
      * WordReader class
      */
     private LinkedList<String> wordList = new LinkedList();
+    /**
+     * LinkedList of type String used to store the frontier queue
+     */
+    private LinkedList<String> frontier;
 
+    //////////////////////// Constructors ///////////////////////////
+    
     /**
      * Constructor that takes an instance of the Graph class and sets its graph
      * instantiation to the graph passed in
@@ -94,7 +99,7 @@ public class DiscoverLadder {
             storeWordLadder(endWord);
             System.out.println("Word Ladder successfully generated.");
             for (int counter = 0; counter < resultStack.size(); counter++) {
-                System.out.println(getResultStack().get(counter)); //Prints out the word ladder stack if successful
+                System.out.println(resultStack.get(counter)); //Prints out the word ladder stack if successful
             }
             System.out.println("Number of words in ladder: " + resultStack.size());
         } else {
@@ -145,110 +150,57 @@ public class DiscoverLadder {
         return wordPresent;
     }
 
+    /**
+     * Breadth-First Search (BFS) algorithm to find the shortest word ladder
+     * between two words
+     *
+     * @param currentVertex The current vertex/word being analysed
+     * @param endVertex The target vertex/word/goal state
+     * @param currentDepth The current depth in the graph
+     * @return Returns true if word ladder has been found, false if not
+     */
     private boolean breadthFirstSearchForDiscovery(Vertex currentVertex, Vertex endVertex, int currentDepth) {
-        if (currentVertex.getDistanceFromStartVertex() < 0) {
-            currentVertex.setDistanceFromStartVertex(currentDepth);
-            frontier.add(currentVertex.getWord());
+        if (currentVertex.getDistanceFromStartVertex() < 0) { //Checks if current vertex has been explored
+            currentVertex.setDistanceFromStartVertex(currentDepth); //Sets distance from start vertex to the current dpeth, if it is the start vertex, distance would be 0
+            frontier.add(currentVertex.getWord()); //Adds the current vertex to the queue
         }
 
-        if (currentVertex.getWord().equals(endVertex.getWord())) {
+        if (currentVertex.getWord().equals(endVertex.getWord())) { //Checks if goal state has been met
             return true;
         } else {
-            frontier.removeFirst();
-            for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
-                if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) {
-                    frontier.add(graph.getGraphHash().get(neighbour).getWord());
-                    graph.getGraphHash().get(neighbour).setDistanceFromStartVertex(currentDepth + 1);
-                    graph.getGraphHash().get(neighbour).setPredecessor(currentVertex.getWord());
+            frontier.removeFirst(); //Removes the current vertex from the queue (counted as explored)
+            while (!frontier.isEmpty()) { //Evaluates if the fronier queue is not empty
+                for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
+                    if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) { //Evaluates if the vertexes have been explored
+                        frontier.add(graph.getGraphHash().get(neighbour).getWord()); //Adds neighbour/child vertex to end of queue
+                        graph.getGraphHash().get(neighbour).setDistanceFromStartVertex(currentDepth + 1); //Sets the distance from start vertex to the next depth level
+                        graph.getGraphHash().get(neighbour).setPredecessor(currentVertex.getWord()); //Sets the predecesor/parent vertex of the neighbour/chile vertex to the current vertex
+                    }
                 }
-            }
 
-            for (int counter = 0; counter < frontier.size(); counter++) {
-                if (breadthFirstSearchForDiscovery(graph.getGraphHash().get(frontier.get(counter)), endVertex, currentDepth + 1) == true) {
-                    return true;
+                for (int counter = 0; counter < frontier.size(); counter++) { //Cycles the queue
+                    if (breadthFirstSearchForDiscovery(graph.getGraphHash().get(frontier.get(counter)), endVertex, currentDepth + 1) == true) {
+                        return true; //Returns true and breaks out of the recursive function, it cascades out
+                    }
                 }
             }
         }
-        return false;
+        return false; //Return false if no result found. If false is returned at the top, a failure to find the result has occurred
     }
 
-    /*private boolean iterativeDeepeningSearchForDiscovery(Vertex startVertex, Vertex endVertex, int startDepth) {
-     int currentDepthLimit = 0;
-     boolean resultFound = false;
-     boolean failureToDiscoverLadder = false;
-
-     while (resultFound == false && failureToDiscoverLadder == false) {
-     failureToDiscoverLadder = checkFailureToDiscoverLadder();
-
-     if (failureToDiscoverLadder == false) {
-     resultFound = recursiveDepthLimitedSearchForDiscovery(startVertex, endVertex, startDepth, currentDepthLimit);
-     }
-     if (resultFound == true) {
-     return true;
-     } else {
-     currentDepthLimit++;
-     resultFound = recursiveDepthLimitedSearchForDiscovery(startVertex, endVertex, startDepth, currentDepthLimit);
-     }
-     }
-
-     return false;
-     }
-
-     private boolean recursiveDepthLimitedSearchForDiscovery(Vertex currentVertex, Vertex endVertex, int currentDepth, int depthLimit) {
-     if (currentVertex.getDistanceFromStartVertex() < 0) {
-     currentVertex.setDistanceFromStartVertex(currentDepth);
-     }
-
-     if (currentVertex.getDistanceFromStartVertex() > currentDepth) {
-     return false;
-     } else {
-     if (currentVertex.getWord().equals(endVertex.getWord())) {
-     resultStack.push(currentVertex.getWord());
-     return true;
-     } else if (currentVertex.getDistanceFromStartVertex() == depthLimit) {
-     return false;
-     } else {
-     for (String neighbours : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
-     if (graph.getGraphHash().get(neighbours).getDistanceFromStartVertex() < 0) {
-     result = recursiveDepthLimitedSearchForDiscovery(graph.getGraphHash().get(neighbours), endVertex, currentDepth + 1, depthLimit);
-     if (result == true) {
-     resultStack.push(currentVertex.getWord());
-     return true;
-     }
-     }
-     }
-     }
-     }
-     return false;
-     }
-
-     private boolean checkFailureToDiscoverLadder() {
-     Iterator<Map.Entry<String, Vertex>> iterator;
-     String key;
-     Vertex vertex;
-     iterator = graph.getHashIterator();
-
-     while (iterator.hasNext()) {
-     key = iterator.next().getKey();
-     vertex = graph.getGraphHash().get(key);
-     if (vertex.getDistanceFromStartVertex() < 0) {
-     return false;
-     }
-     }
-     return true;
-     } */
-    
+    /**
+     * Method that stacks the path/word ladder between the two words, works
+     * backwards from the goal state using the predecessor variable
+     *
+     * @param endWord The target vertex/word/goal state
+     */
     public void storeWordLadder(String endWord) {
         String currentWord = endWord;
-        resultStack.add(endWord);
-        
-        while (graph.getGraphHash().get(currentWord).getPredecessor() != null) {
-            resultStack.push(graph.getGraphHash().get(currentWord).getPredecessor());
-            currentWord = graph.getGraphHash().get(currentWord).getPredecessor();
+        resultStack.add(endWord); //Adds the goal state word to the result stack
+
+        while (graph.getGraphHash().get(currentWord).getPredecessor() != null) { //Loops until hit start vertex as the start vertex would have no predecessor so would be null
+            resultStack.push(graph.getGraphHash().get(currentWord).getPredecessor()); //Adds predecessor to result stack
+            currentWord = graph.getGraphHash().get(currentWord).getPredecessor(); //Sets the current word to the predecessor vertex
         }
-    }
-    
-    public Stack getResultStack() {
-        return this.resultStack;
     }
 }
