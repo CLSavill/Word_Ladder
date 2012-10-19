@@ -2,7 +2,6 @@
  * @author Chris Savill - chs17
  * @title CS21120 WordLadder graph builder class
  */
-
 package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
@@ -12,37 +11,59 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class GraphBuilder {
+    //////////////////////// Variables ///////////////////////////
+
+    /**
+     * Graph class for the builder to build
+     */
     private Graph graph;
-    
+
     //////////////////////// Constructors ///////////////////////////
-    
+    /**
+     * Constructor that instantiates the graph to the graph passed in
+     *
+     * @param graph
+     */
     public GraphBuilder(Graph graph) {
         this.graph = graph;
     }
-    
+
+    //////////////////////// Methods ///////////////////////////
+    /**
+     * Method that builds the graph using the word list passed in
+     *
+     * @param wordList
+     */
     public void createGraph(LinkedList<String> wordList) {
         String key;
         Vertex vertex;
         Vertex newVertex;
-        Iterator<Map.Entry<String, Vertex>> iterator;          
+        Iterator<Map.Entry<String, Vertex>> iterator;
 
         for (int counter = 0; counter < wordList.size(); counter++) {
-            graph.getGraphHash().put(wordList.get(counter), newVertex = new Vertex(wordList.get(counter)));
-            iterator = graph.getHashIterator();
-            
+            graph.getGraphHash().put(wordList.get(counter), newVertex = new Vertex(wordList.get(counter))); //Creates a new vertex, initialising it with the word in the word list at the index of the counter
+            iterator = graph.getHashIterator(); //Retrieves a new iterator for the hash table within the graph class
+
             while (iterator.hasNext()) {
-                key = iterator.next().getKey();
-                vertex = graph.getGraphHash().get(key);
+                key = iterator.next().getKey(); //Assigns the next key from to the iterator to the key variable
+                vertex = graph.getGraphHash().get(key); //Assigns the vertex in the hash table referenced from the key to the vertex variable
                 if (checkOneLetterDifference(newVertex.getWord(), vertex.getWord()) == true) {
-                    vertex.addNeighbour(newVertex.getWord());
-                    newVertex.addNeighbour(vertex.getWord());
+                    vertex.addNeighbour(newVertex.getWord()); //Adds newVertex word to the neighbour adjacency list of the current vertex it is being compared to
+                    newVertex.addNeighbour(vertex.getWord()); //Adds the current vertex word to the neighbour adjacency list of the newVertex it is being compared to
                 }
             }
         }
     }
 
-    
-
+    /**
+     * Method to check if the two words being passed in only have a one letter
+     * difference
+     *
+     * @param wordToCheck
+     * @param wordToCompareWith
+     * @return Returns true or false depending on whether or not the two works
+     * only have a one letter difference
+     */
     private boolean checkOneLetterDifference(String wordToCheck, String wordToCompareWith) {
         boolean oneLetterDifference = false;
         int numberOfLettersMatched = 0;

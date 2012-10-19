@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class DiscoverLadder {
+    //////////////////////// Variables ///////////////////////////
 
     /**
      * Scanner class used for retrieving user input
@@ -41,9 +42,9 @@ public class DiscoverLadder {
      */
     private String endWord;
     /**
-     * int used to set a max word length on words being used in the word ladder,
-     * can be changed later if additional word data files generated for other
-     * lengths
+     * int primitive used to set a max word length on words being used in the
+     * word ladder, can be changed later if additional word data files generated
+     * for other lengths
      */
     private int maxWordLength = 7;
     /**
@@ -82,6 +83,7 @@ public class DiscoverLadder {
         this.graph = graph;
     }
 
+    //////////////////////// Methods ///////////////////////////
     /**
      * Method that sets off the word ladder discovery cycle, first by calling a
      * method that gets the words to ladder between from the user, then calls a
@@ -97,7 +99,7 @@ public class DiscoverLadder {
         if (breadthFirstSearchForDiscovery(graph.getGraphHash().get(startWord), graph.getGraphHash().get(endWord), 0) == true) { //Evaluates the result of the iterativeDeepeningSearchForDiscovery method
             storeWordLadder(endWord);
             System.out.println("Word Ladder successfully generated.");
-            for (int counter = 0; counter < resultStack.size(); counter++) {
+            for (int counter = resultStack.size() - 1; counter >= 0; counter--) {
                 System.out.println(resultStack.get(counter)); //Prints out the word ladder stack if successful
             }
             System.out.println("Number of words in ladder: " + resultStack.size());
@@ -106,6 +108,11 @@ public class DiscoverLadder {
         }
     }
 
+    /**
+     * Method that cycles through getting the user to input two valid words for
+     * the word ladder discovery and checks if they exist in the data files
+     * supplied
+     */
     private void getUserInputForDiscovery() {
         while (startWordPresent == false) {
             startWord = "WordTooLong"; //"WordTooLong" used as it has more than 7 letters and to initialise word ready for while loop condition checking
@@ -139,6 +146,15 @@ public class DiscoverLadder {
         }
     }
 
+    /**
+     * Method that checks if the word passed in is present in the word list
+     * supplied
+     *
+     * @param wordList
+     * @param word
+     * @return Returns true or false depending on whether or not the word passed
+     * in is present in he word list supplied
+     */
     private boolean checkWordPresent(LinkedList<String> wordList, String word) {
         boolean wordPresent = false;
         for (int counter = 0; counter < wordList.size() && wordPresent == false; counter++) {
@@ -161,7 +177,7 @@ public class DiscoverLadder {
     private boolean breadthFirstSearchForDiscovery(Vertex currentVertex, Vertex endVertex, int currentDepth) {
 
         if (currentVertex.getDistanceFromStartVertex() < 0) { //Checks if current vertex has been explored
-            currentVertex.setDistanceFromStartVertex(currentDepth); //Sets distance from start vertex to the current dpeth, if it is the start vertex, distance would be 0
+            currentVertex.setDistanceFromStartVertex(currentDepth); //Sets distance from start vertex to the current depth, if it is the start vertex, distance would be 0
             frontier.add(currentVertex.getWord()); //Adds the current vertex to the queue
         }
 
@@ -197,7 +213,7 @@ public class DiscoverLadder {
      */
     public void storeWordLadder(String endWord) {
         String currentWord = endWord;
-        resultStack.add(endWord); //Adds the goal state word to the result stack
+        resultStack.push(endWord); //Adds the goal state word to the result stack
 
         while (graph.getGraphHash().get(currentWord).getPredecessor() != null) { //Loops until hit start vertex as the start vertex would have no predecessor so would be null
             resultStack.push(graph.getGraphHash().get(currentWord).getPredecessor()); //Adds predecessor to result stack

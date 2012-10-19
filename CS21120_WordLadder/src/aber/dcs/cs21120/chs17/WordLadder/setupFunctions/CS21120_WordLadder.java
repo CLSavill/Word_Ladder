@@ -10,7 +10,8 @@ import aber.dcs.cs21120.chs17.WordLadder.searchFunctions.GenerateLadder;
 import java.util.Scanner;
 
 public class CS21120_WordLadder {
-    /**
+    
+    /** Main method
      * @param args the command line arguments
      */
     public static void main(String[] args) {

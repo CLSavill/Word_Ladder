@@ -11,10 +11,16 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//////////////////////// Constructors ///////////////////////////
-
 public class WordReader {
 
+    //////////////////////// Methods ///////////////////////////
+    /**
+     * Method that reads the words of a file into a LinkedList of String type
+     *
+     * @param wordLength
+     * @return Returns the new LinkedList of String type containing the word
+     * list
+     */
     public LinkedList<String> readWords(int wordLength) {
         int numberOfWords = 0;
         int numberOfRelevantWords = 0;
