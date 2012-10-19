@@ -150,8 +150,8 @@ public class DiscoverLadder {
      * Method that checks if the word passed in is present in the word list
      * supplied
      *
-     * @param wordList
-     * @param word
+     * @param wordList The LinkedList of type String that contains the list of words for comparison
+     * @param word The String to compare with the wordList LinkedList
      * @return Returns true or false depending on whether or not the word passed
      * in is present in he word list supplied
      */

@@ -22,7 +22,7 @@ public class GraphBuilder {
     /**
      * Constructor that instantiates the graph to the graph passed in
      *
-     * @param graph
+     * @param graph The Graph to initialise the GraphBuilder graph
      */
     public GraphBuilder(Graph graph) {
         this.graph = graph;
@@ -32,7 +32,8 @@ public class GraphBuilder {
     /**
      * Method that builds the graph using the word list passed in
      *
-     * @param wordList
+     * @param wordList The LinkedList of type String from which a graph is built
+     * from
      */
     public void createGraph(LinkedList<String> wordList) {
         String key;
@@ -59,8 +60,8 @@ public class GraphBuilder {
      * Method to check if the two words being passed in only have a one letter
      * difference
      *
-     * @param wordToCheck
-     * @param wordToCompareWith
+     * @param wordToCheck A String to compare with the wordToCompareWith String
+     * @param wordToCompareWith A String to compare with the wordToCheck String
      * @return Returns true or false depending on whether or not the two works
      * only have a one letter difference
      */

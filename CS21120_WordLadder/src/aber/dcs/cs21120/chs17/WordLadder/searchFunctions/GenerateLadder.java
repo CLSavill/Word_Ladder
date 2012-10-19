@@ -127,8 +127,9 @@ public class GenerateLadder {
      * Method that checks if the word passed in is present in the word list
      * supplied
      *
-     * @param wordList
-     * @param word
+     * @param wordList The LinkedList of type String that contains the list of
+     * words for comparison
+     * @param word The String to compare with the wordList LinkedList
      * @return Returns true or false depending on whether or not the word passed
      * in is present in he word list supplied
      */
@@ -146,13 +147,13 @@ public class GenerateLadder {
      * Depth-Limited Search (DLS) algorithm to find the word ladder for a word
      * up to a certain depth
      *
-     * @param currentVertex the current vertex being evaluated to see if goal
+     * @param currentVertex The current vertex being evaluated to see if goal
      * state has been met.
-     * @param currentDepth the current depth at which the current vertex lies
+     * @param currentDepth The current depth at which the current vertex lies
      * at.
-     * @param depthLimit the maximum depth that the search will go to to find
-     * the goal state.
-     * @return Returns true or false based on whether the goal state has been
+     * @param depthLimit The maximum depth that the search will go to; the goal
+     * state
+     * @return Returns True or false based on whether the goal state has been
      * found.
      */
     private boolean recursiveDepthLimitedSearchForGeneration(Vertex currentVertex, int currentDepth, int depthLimit) {

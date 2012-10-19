@@ -17,7 +17,8 @@ public class WordReader {
     /**
      * Method that reads the words of a file into a LinkedList of String type
      *
-     * @param wordLength
+     * @param wordLength int value of the word length for use with defining the
+     * data file to be used
      * @return Returns the new LinkedList of String type containing the word
      * list
      */
@@ -30,7 +31,7 @@ public class WordReader {
         try {
             BufferedReader fileToBeRead = new BufferedReader(new FileReader("WordsOfLength" + wordLength + ".dat"));
 
-            while (fileToBeRead.readLine() != null) {
+            while (fileToBeRead.readLine() != null) { //Loops to the end of the file
                 numberOfWords++;
             }
 
@@ -47,7 +48,7 @@ public class WordReader {
             for (int counter = 0; counter < numberOfWords; counter++) {
                 if (numberOfRelevantWords == 0) {
                     try {
-                        wordStore.add(fileToBeRead.readLine());
+                        wordStore.add(fileToBeRead.readLine()); //Adds new word to the word store LinkedList
                     } catch (IOException ex) {
                         Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -55,16 +56,15 @@ public class WordReader {
                     wordAlreadyStored = false;
                     try {
                         wordRead = fileToBeRead.readLine();
-                        if (wordRead.length() == wordLength) {
-                            for (int counter2 = 0; counter2 < numberOfRelevantWords || wordAlreadyStored == true; counter2++) {
-                                if (wordStore.get(counter2).equals(wordRead)) {
-                                    wordAlreadyStored = true;
-                                }
+
+                        for (int counter2 = 0; counter2 < numberOfRelevantWords || wordAlreadyStored == true; counter2++) {
+                            if (wordStore.get(counter2).equals(wordRead)) { //Evaluates if word is already contained in the word store LinkedList
+                                wordAlreadyStored = true;
                             }
-                            if (wordAlreadyStored == false) {
-                                wordStore.add(wordRead);
-                                numberOfRelevantWords++;
-                            }
+                        }
+                        if (wordAlreadyStored == false) {
+                            wordStore.add(wordRead);
+                            numberOfRelevantWords++;
                         }
                     } catch (IOException ex) {
                         Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);

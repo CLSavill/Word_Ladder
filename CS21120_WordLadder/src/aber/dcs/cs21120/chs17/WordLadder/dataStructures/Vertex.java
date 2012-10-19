@@ -40,7 +40,7 @@ public class Vertex {
     /**
      * Constructor used for initialising the word and neighbours
      *
-     * @param word
+     * @param word the String to initialise the vertex word variable
      */
     public Vertex(String word) {
         this.word = word;
@@ -70,7 +70,7 @@ public class Vertex {
      * Method to set the value of the distance that this vertex it from the
      * start vertex
      *
-     * @param distanceFromStartVertex
+     * @param distanceFromStartVertex The int value to initialise the vertex distanceFromStartVertex variable
      */
     public void setDistanceFromStartVertex(int distanceFromStartVertex) {
         this.distanceFromStartVertex = distanceFromStartVertex;
@@ -80,7 +80,7 @@ public class Vertex {
      * Method to add a new neighbour to the adjacency list (LinkedList) of
      * neighbours
      *
-     * @param word
+     * @param word The string to add to the adjacency list of the vertex
      */
     public void addNeighbour(String word) {
         neighbours.add(word);
@@ -107,7 +107,7 @@ public class Vertex {
     /**
      * Method to set the predecessor of the vertex
      *
-     * @param predecessor
+     * @param predecessor The String to initialise the vertex predecessor variable
      */
     public void setPredecessor(String predecessor) {
         this.predecessor = predecessor;
