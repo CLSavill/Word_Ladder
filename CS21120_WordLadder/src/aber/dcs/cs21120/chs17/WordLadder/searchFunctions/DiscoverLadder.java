@@ -72,7 +72,6 @@ public class DiscoverLadder {
     private LinkedList<String> frontier;
 
     //////////////////////// Constructors ///////////////////////////
-    
     /**
      * Constructor that takes an instance of the Graph class and sets its graph
      * instantiation to the graph passed in
@@ -160,16 +159,20 @@ public class DiscoverLadder {
      * @return Returns true if word ladder has been found, false if not
      */
     private boolean breadthFirstSearchForDiscovery(Vertex currentVertex, Vertex endVertex, int currentDepth) {
+
         if (currentVertex.getDistanceFromStartVertex() < 0) { //Checks if current vertex has been explored
             currentVertex.setDistanceFromStartVertex(currentDepth); //Sets distance from start vertex to the current dpeth, if it is the start vertex, distance would be 0
             frontier.add(currentVertex.getWord()); //Adds the current vertex to the queue
         }
 
-        if (currentVertex.getWord().equals(endVertex.getWord())) { //Checks if goal state has been met
-            return true;
-        } else {
-            frontier.removeFirst(); //Removes the current vertex from the queue (counted as explored)
-            while (!frontier.isEmpty()) { //Evaluates if the fronier queue is not empty
+        while (!frontier.isEmpty()) { //Evaluates if the frontier queue is not empty
+
+            if (currentVertex.getWord().equals(endVertex.getWord())) { //Checks if goal state has been met
+                return true;
+            } else {
+                currentVertex = graph.getGraphHash().get(frontier.getFirst()); //Sets the current vertex to the vertex at the front of the queue
+                frontier.removeFirst(); //Removes the current vertex from the frontier queue, (counted as explored)
+
                 for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
                     if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) { //Evaluates if the vertexes have been explored
                         frontier.add(graph.getGraphHash().get(neighbour).getWord()); //Adds neighbour/child vertex to end of queue
@@ -178,10 +181,8 @@ public class DiscoverLadder {
                     }
                 }
 
-                for (int counter = 0; counter < frontier.size(); counter++) { //Cycles the queue
-                    if (breadthFirstSearchForDiscovery(graph.getGraphHash().get(frontier.get(counter)), endVertex, currentDepth + 1) == true) {
-                        return true; //Returns true and breaks out of the recursive function, it cascades out
-                    }
+                if (graph.getGraphHash().get(currentVertex.getWord()).getWord().equals(endVertex.getWord())) {
+                    return true; //Returns true and breaks out of the while loop
                 }
             }
         }
