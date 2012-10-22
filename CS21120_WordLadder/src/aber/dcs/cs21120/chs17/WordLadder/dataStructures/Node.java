@@ -1,9 +1,9 @@
+package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
+
 /**
  * @author Chris Savill - chs17
  * @title Node class for use within LinkedList class
  */
-package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
-
 public class Node {
     //////////////////////// Variables ///////////////////////////
 

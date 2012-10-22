@@ -1,9 +1,9 @@
+package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
+
 /**
  * @author Chris Savill - chs17
  * @title LinkedList class that expands dynamically when needed
  */
-package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
-
 public class LinkedList {
     //////////////////////// Variables ///////////////////////////
 

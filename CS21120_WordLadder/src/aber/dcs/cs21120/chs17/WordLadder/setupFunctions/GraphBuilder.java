@@ -1,7 +1,3 @@
-/**
- * @author Chris Savill - chs17
- * @title CS21120 WordLadder graph builder class
- */
 package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
@@ -10,6 +6,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
+/**
+ * @author Chris Savill - chs17
+ * @title CS21120 WordLadder graph builder class
+ */
 public class GraphBuilder {
     //////////////////////// Variables ///////////////////////////
 

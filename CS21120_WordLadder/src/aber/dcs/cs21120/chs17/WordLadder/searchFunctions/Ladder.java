@@ -1,8 +1,3 @@
-/**
- * @author Chris Savill - chs17
- * @title CS21120 WordLadder abstract class to contain the common methods of the
- * two search algorithms
- */
 package aber.dcs.cs21120.chs17.WordLadder.searchFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
@@ -11,6 +6,11 @@ import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.WordReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * @author Chris Savill - chs17
+ * @title CS21120 WordLadder abstract class to contain the common methods of the
+ * two search algorithms
+ */
 public abstract class Ladder {
     //////////////////////// Variables ///////////////////////////
 
@@ -69,7 +69,7 @@ public abstract class Ladder {
         }
         return wordPresent;
     }
-    
+
     /**
      * Method to print the resulting ladder from the result stack
      */
@@ -78,6 +78,6 @@ public abstract class Ladder {
         System.out.println("Number of words in ladder: " + resultStack.sizeOf());
         while (!resultStack.isEmpty()) {
             System.out.println(resultStack.pop().toString()); //Prints out the word ladder stack if successful
-        }       
+        }
     }
 }

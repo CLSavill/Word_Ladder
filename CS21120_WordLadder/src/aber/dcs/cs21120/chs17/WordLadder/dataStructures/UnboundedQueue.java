@@ -1,9 +1,9 @@
+package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
+
 /**
  * @author Chris Savill - chs17
  * @title Dynamic Queue class
  */
-package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
-
 public class UnboundedQueue {
     //////////////////////// Variables ///////////////////////////
 

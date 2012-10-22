@@ -1,12 +1,12 @@
+package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
+
+import java.util.LinkedList;
+
 /**
  * @author Chris Savill - chs17
  * @title CS21120 WordLadder class to represent a vertex/node for use within the
  * graph
  */
-package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
-
-import java.util.LinkedList;
-
 public class Vertex {
     //////////////////////// Variables ///////////////////////////
 
@@ -70,7 +70,8 @@ public class Vertex {
      * Method to set the value of the distance that this vertex it from the
      * start vertex
      *
-     * @param distanceFromStartVertex The int value to initialise the vertex distanceFromStartVertex variable
+     * @param distanceFromStartVertex The int value to initialise the vertex
+     * distanceFromStartVertex variable
      */
     public void setDistanceFromStartVertex(int distanceFromStartVertex) {
         this.distanceFromStartVertex = distanceFromStartVertex;
@@ -107,7 +108,8 @@ public class Vertex {
     /**
      * Method to set the predecessor of the vertex
      *
-     * @param predecessor The String to initialise the vertex predecessor variable
+     * @param predecessor The String to initialise the vertex predecessor
+     * variable
      */
     public void setPredecessor(String predecessor) {
         this.predecessor = predecessor;

@@ -1,7 +1,3 @@
-/**
- * @author Chris Savill - chs17
- * @title CS21120 WordLadder project main class
- */
 package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
@@ -9,11 +5,14 @@ import aber.dcs.cs21120.chs17.WordLadder.searchFunctions.DiscoverLadder;
 import aber.dcs.cs21120.chs17.WordLadder.searchFunctions.GenerateLadder;
 import java.util.Scanner;
 
+/**
+ * @author Chris Savill - chs17
+ * @title CS21120 WordLadder project main class
+ */
 public class CS21120_WordLadder {
 
     /**
      * Main method
-     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {

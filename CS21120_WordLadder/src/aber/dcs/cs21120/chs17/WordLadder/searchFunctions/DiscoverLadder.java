@@ -1,7 +1,3 @@
-/**
- * @author Chris Savill - chs17
- * @title CS21120 WordLadder class to run the discovery part of the project.
- */
 package aber.dcs.cs21120.chs17.WordLadder.searchFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
@@ -9,6 +5,10 @@ import aber.dcs.cs21120.chs17.WordLadder.dataStructures.UnboundedQueue;
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Vertex;
 import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.GraphBuilder;
 
+/**
+ * @author Chris Savill - chs17
+ * @title CS21120 WordLadder class to run the discovery part of the project.
+ */
 public class DiscoverLadder extends Ladder {
     //////////////////////// Variables ///////////////////////////
 
@@ -58,7 +58,7 @@ public class DiscoverLadder extends Ladder {
         getUserInputForDiscovery();
         GraphBuilder graphBuilder = new GraphBuilder(graph);
         graphBuilder.createGraph(wordList);
-
+        
         if (breadthFirstSearchForDiscovery(graph.getGraphHash().get(startWord), graph.getGraphHash().get(endWord), 0) == true) { //Evaluates the result of the iterativeDeepeningSearchForDiscovery method
             storeWordLadder(endWord);
             printLadder();
@@ -80,23 +80,23 @@ public class DiscoverLadder extends Ladder {
                 System.out.println("Please enter in a start word from which the word ladder will start from (no more than 7 letters): ");
                 startWord = input.next();
             }
-
+            
             wordList = reader.readWords(startWord.length());
-
+            
             if (checkWordPresent(wordList, startWord) == true) { //Evaluates if the word chosen exists in the appropriate word data file
                 startWordPresent = true;
             } else {
                 System.out.println("Start word is not present in file, please try another word.");
             }
         }
-
+        
         while (endWordPresent == false) {
             while (endWord.length() != startWord.length()) {
                 System.out.println("Please enter in the target word to ladder to (same length as the start word): ");
                 endWord = input.next();
             }
-
-
+            
+            
             if (checkWordPresent(wordList, endWord) == true) { //Evaluates if the word chosen exists in the appropriate word data file
                 endWordPresent = true;
             } else {
@@ -115,12 +115,12 @@ public class DiscoverLadder extends Ladder {
      * @return Returns true if word ladder has been found, false if not
      */
     private boolean breadthFirstSearchForDiscovery(Vertex currentVertex, Vertex endVertex, int currentDepth) {
-
+        
         if (currentVertex.getDistanceFromStartVertex() < 0) { //Checks if current vertex has been explored
             currentVertex.setDistanceFromStartVertex(currentDepth); //Sets distance from start vertex to the current depth, if it is the start vertex, distance would be 0
             frontier.add(currentVertex.getWord()); //Adds the current vertex to the queue
         }
-
+        
         while (!frontier.isEmpty()) { //Evaluates if the frontier queue is not empty
 
             if (currentVertex.getWord().equals(endVertex.getWord())) { //Checks if goal state has been met
@@ -136,7 +136,7 @@ public class DiscoverLadder extends Ladder {
                         graph.getGraphHash().get(neighbour).setPredecessor(currentVertex.getWord()); //Sets the predecesor/parent vertex of the neighbour/chile vertex to the current vertex
                     }
                 }
-
+                
                 if (graph.getGraphHash().get(currentVertex.getWord()).getWord().equals(endVertex.getWord())) {
                     return true; //Returns true and breaks out of the while loop
                 }

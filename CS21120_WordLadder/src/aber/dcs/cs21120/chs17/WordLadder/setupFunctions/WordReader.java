@@ -1,7 +1,3 @@
-/**
- * @author Chris Savill - chs17
- * @title Class that contains various methods to read words from a file
- */
 package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
 
 import java.io.BufferedReader;
@@ -11,6 +7,10 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Chris Savill - chs17
+ * @title Class that contains various methods to read words from a file
+ */
 public class WordReader {
 
     //////////////////////// Methods ///////////////////////////

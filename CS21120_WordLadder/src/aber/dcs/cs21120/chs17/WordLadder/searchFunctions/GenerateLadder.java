@@ -1,13 +1,13 @@
-/**
- * @author Chris Savill - chs17
- * @title CS21120 WordLadder class to run the generation part of the project.
- */
 package aber.dcs.cs21120.chs17.WordLadder.searchFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Vertex;
 import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.GraphBuilder;
 
+/**
+ * @author Chris Savill - chs17
+ * @title CS21120 WordLadder class to run the generation part of the project.
+ */
 public class GenerateLadder extends Ladder {
     //////////////////////// Variables ///////////////////////////
 
@@ -38,7 +38,6 @@ public class GenerateLadder extends Ladder {
     }
 
     //////////////////////// Methods ///////////////////////////
-    
     /**
      * Method that sets off the word ladder generation cycle, first by calling a
      * method that gets the word to ladder from the user, then calls a method

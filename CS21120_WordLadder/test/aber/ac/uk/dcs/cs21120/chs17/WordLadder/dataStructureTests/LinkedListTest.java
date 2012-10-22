@@ -1,14 +1,13 @@
 package aber.ac.uk.dcs.cs21120.chs17.WordLadder.dataStructureTests;
 
+import aber.dcs.cs21120.chs17.WordLadder.dataStructures.LinkedList;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
 /**
  * @author Chris Savill - chs17
  * @title JUnit test class for the LinkedList class
  */
-
-import aber.dcs.cs21120.chs17.WordLadder.dataStructures.LinkedList;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 public class LinkedListTest {
     
     @Test

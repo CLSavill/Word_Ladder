@@ -1,13 +1,13 @@
-/**
- * @author Chris Savill - chs17
- * @title CS21120 WordLadder class that represents a graph data structure
- */
 package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
 
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @author Chris Savill - chs17
+ * @title CS21120 WordLadder class that represents a graph data structure
+ */
 public class Graph {
     //////////////////////// Variables ///////////////////////////
 
