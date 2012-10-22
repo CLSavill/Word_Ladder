@@ -10,8 +10,10 @@ import aber.dcs.cs21120.chs17.WordLadder.searchFunctions.GenerateLadder;
 import java.util.Scanner;
 
 public class CS21120_WordLadder {
-    
-    /** Main method
+
+    /**
+     * Main method
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -19,18 +21,23 @@ public class CS21120_WordLadder {
         Scanner input = new Scanner(System.in);
         GenerateLadder generateLadder;
         DiscoverLadder discoverLadder;
-        
+
         System.out.println("Welcome to WordLadder!");
         System.out.println("----------------------");
-        
-        while (menuChoice != 3) {
-            System.out.println("Please select one of the following options: ");
+
+        do {
+            System.out.println("\nPlease select one of the following options: ");
             System.out.println("Option 1: Generate a word ladder.");
             System.out.println("Option 2: Discover the shortest word ladder between 2 words.");
             System.out.println("Option 3: Exit.\n");
-            
+
+            while (!input.hasNextInt()) {
+                System.out.println("Please enter in a valid option.");
+                input.next();
+            }
+
             menuChoice = input.nextInt();
-            
+
             switch (menuChoice) {
                 case 1:
                     Graph generatorGraph = new Graph();
@@ -48,6 +55,7 @@ public class CS21120_WordLadder {
                 default:
                     System.out.println("Invalid option selected, please select a valid option.");
             }
-        }
+        } while (menuChoice
+                != 3);
     }
 }

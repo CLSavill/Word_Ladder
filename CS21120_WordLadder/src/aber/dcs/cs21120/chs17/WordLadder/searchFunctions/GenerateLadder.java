@@ -7,32 +7,10 @@ package aber.dcs.cs21120.chs17.WordLadder.searchFunctions;
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Vertex;
 import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.GraphBuilder;
-import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.WordReader;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.Stack;
 
-public class GenerateLadder {
-
+public class GenerateLadder extends Ladder {
     //////////////////////// Variables ///////////////////////////
-    /**
-     * Scanner class used for retrieving user input
-     */
-    private Scanner input = new Scanner(System.in);
-    /**
-     * Graph class used for structuring a graph for use with the search
-     * algorithm
-     */
-    private Graph graph;
-    /**
-     * Stack class used for storing the resulting words in the word ladder
-     */
-    private Stack resultStack = new Stack();
-    /**
-     * Boolean used to store true/false depending on whether a solution has been
-     * found
-     */
-    private boolean result = false;
+
     /**
      * String used to store the word chosen for the word ladder
      */
@@ -43,26 +21,10 @@ public class GenerateLadder {
      */
     private int stepsInLadder = 0;
     /**
-     * int primitive used to set a max word length on words being used in the
-     * word ladder, can be changed later if additional word data files generated
-     * for other lengths
-     */
-    private int maxWordLength = 7;
-    /**
      * boolean used to store true/false depending on whether the word given by
      * the user is present in the word data file provided
      */
     private boolean wordPresent = false;
-    /**
-     * WordReader class used to read in the appropriate words from the
-     * appropriate data files
-     */
-    private WordReader reader = new WordReader();
-    /**
-     * LinkedList of type String used to store all the words read in by the
-     * WordReader class
-     */
-    private LinkedList<String> wordList = new LinkedList();
 
     //////////////////////// Constructors ///////////////////////////
     /**
@@ -76,6 +38,7 @@ public class GenerateLadder {
     }
 
     //////////////////////// Methods ///////////////////////////
+    
     /**
      * Method that sets off the word ladder generation cycle, first by calling a
      * method that gets the word to ladder from the user, then calls a method
@@ -89,10 +52,7 @@ public class GenerateLadder {
 
 
         if (recursiveDepthLimitedSearchForGeneration(graph.getGraphHash().get(wordChosen), 0, stepsInLadder - 1) == true) { //Evaluates the result of the recursiveDepthLimitedSearchForGeneration method
-            System.out.println("Word Ladder successfully generated.");
-            for (int counter = resultStack.size() - 1; counter >= 0; counter--) {
-                System.out.println(resultStack.get(counter)); //Prints out the word ladder stack if successful
-            }
+            printLadder();
         } else {
             System.out.println("Sorry no complete word ladder for '" + wordChosen + "' with '" + stepsInLadder + "' steps in the ladder.");
         }
@@ -121,26 +81,6 @@ public class GenerateLadder {
         }
         System.out.println("Please enter in the number of steps in the ladder you want generated: ");
         stepsInLadder = input.nextInt();
-    }
-
-    /**
-     * Method that checks if the word passed in is present in the word list
-     * supplied
-     *
-     * @param wordList The LinkedList of type String that contains the list of
-     * words for comparison
-     * @param word The String to compare with the wordList LinkedList
-     * @return Returns true or false depending on whether or not the word passed
-     * in is present in he word list supplied
-     */
-    private boolean checkWordPresent(LinkedList<String> wordList, String wordChosen) {
-        wordPresent = false;
-        for (int counter = 0; counter < wordList.size() && wordPresent == false; counter++) {
-            if (wordList.get(counter).equals(wordChosen)) {
-                wordPresent = true;
-            }
-        }
-        return wordPresent;
     }
 
     /**

@@ -5,34 +5,13 @@
 package aber.dcs.cs21120.chs17.WordLadder.searchFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
+import aber.dcs.cs21120.chs17.WordLadder.dataStructures.UnboundedQueue;
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Vertex;
 import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.GraphBuilder;
-import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.WordReader;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.Stack;
 
-public class DiscoverLadder {
+public class DiscoverLadder extends Ladder {
     //////////////////////// Variables ///////////////////////////
 
-    /**
-     * Scanner class used for retrieving user input
-     */
-    private Scanner input = new Scanner(System.in);
-    /**
-     * Graph class used for structuring a graph for use with the search
-     * algorithm
-     */
-    private Graph graph;
-    /**
-     * Stack class used for storing the resulting words in the word ladder
-     */
-    private Stack resultStack = new Stack();
-    /**
-     * boolean used to store true/false depending on whether a solution has been
-     * found
-     */
-    private boolean result = false;
     /**
      * String used to store the start word for the word ladder
      */
@@ -41,12 +20,6 @@ public class DiscoverLadder {
      * String used to store the end word for the word ladder
      */
     private String endWord;
-    /**
-     * int primitive used to set a max word length on words being used in the
-     * word ladder, can be changed later if additional word data files generated
-     * for other lengths
-     */
-    private int maxWordLength = 7;
     /**
      * boolean used to store true/false depending on whether the start word is
      * present in the word data file provided
@@ -58,19 +31,9 @@ public class DiscoverLadder {
      */
     private boolean endWordPresent = false;
     /**
-     * WordReader class used to read in the appropriate words from the
-     * appropriate data files
-     */
-    private WordReader reader = new WordReader();
-    /**
-     * LinkedList of type String used to store all the words read in by the
-     * WordReader class
-     */
-    private LinkedList<String> wordList = new LinkedList();
-    /**
      * LinkedList of type String used to store the frontier queue
      */
-    private LinkedList<String> frontier;
+    private UnboundedQueue frontier;
 
     //////////////////////// Constructors ///////////////////////////
     /**
@@ -91,18 +54,14 @@ public class DiscoverLadder {
      * evaluates its result and acts accordingly
      */
     public void discoverLadder() {
-        frontier = new LinkedList();
+        frontier = new UnboundedQueue();
         getUserInputForDiscovery();
         GraphBuilder graphBuilder = new GraphBuilder(graph);
         graphBuilder.createGraph(wordList);
 
         if (breadthFirstSearchForDiscovery(graph.getGraphHash().get(startWord), graph.getGraphHash().get(endWord), 0) == true) { //Evaluates the result of the iterativeDeepeningSearchForDiscovery method
             storeWordLadder(endWord);
-            System.out.println("Word Ladder successfully generated.");
-            for (int counter = resultStack.size() - 1; counter >= 0; counter--) {
-                System.out.println(resultStack.get(counter)); //Prints out the word ladder stack if successful
-            }
-            System.out.println("Number of words in ladder: " + resultStack.size());
+            printLadder();
         } else {
             System.out.println("Sorry no complete word ladder between '" + startWord + "' and '" + endWord + "'.");
         }
@@ -147,25 +106,6 @@ public class DiscoverLadder {
     }
 
     /**
-     * Method that checks if the word passed in is present in the word list
-     * supplied
-     *
-     * @param wordList The LinkedList of type String that contains the list of words for comparison
-     * @param word The String to compare with the wordList LinkedList
-     * @return Returns true or false depending on whether or not the word passed
-     * in is present in he word list supplied
-     */
-    private boolean checkWordPresent(LinkedList<String> wordList, String word) {
-        boolean wordPresent = false;
-        for (int counter = 0; counter < wordList.size() && wordPresent == false; counter++) {
-            if (wordList.get(counter).equals(startWord)) {
-                wordPresent = true;
-            }
-        }
-        return wordPresent;
-    }
-
-    /**
      * Breadth-First Search (BFS) algorithm to find the shortest word ladder
      * between two words
      *
@@ -186,8 +126,8 @@ public class DiscoverLadder {
             if (currentVertex.getWord().equals(endVertex.getWord())) { //Checks if goal state has been met
                 return true;
             } else {
-                currentVertex = graph.getGraphHash().get(frontier.getFirst()); //Sets the current vertex to the vertex at the front of the queue
-                frontier.removeFirst(); //Removes the current vertex from the frontier queue, (counted as explored)
+                currentVertex = graph.getGraphHash().get(frontier.head().toString()); //Sets the current vertex to the vertex at the front of the queue
+                frontier.remove(); //Removes the current vertex from the frontier queue, (counted as explored)
 
                 for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
                     if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) { //Evaluates if the vertexes have been explored
