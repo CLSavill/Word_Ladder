@@ -17,7 +17,7 @@ public class UnboundedStackTest {
     }
 
     @Test
-    public void testPushandPop() {
+    public void testPushAndPop() {
         UnboundedStack testStack = new UnboundedStack();
 
         testStack.push(3);
@@ -25,7 +25,7 @@ public class UnboundedStackTest {
     }
 
     @Test
-    public void testMultiPushandPop() {
+    public void testMultiPushAndPop() {
         UnboundedStack testStack = new UnboundedStack();
 
         testStack.push(3);
@@ -54,4 +54,15 @@ public class UnboundedStackTest {
         testStack2.push("w7p");
         assertEquals("Expected '3' as the length of the stack.", 3, testStack2.sizeOf());
     }
+    
+    @Test
+    public void testIsEmpty() {
+        UnboundedStack testStack = new UnboundedStack();
+        assertTrue("Stack should be empty.", testStack.isEmpty());
+        
+        testStack.push("Hello");
+        assertFalse("Stack should not be empty.", testStack.isEmpty());
+    }
+    
+    
 }

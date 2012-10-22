@@ -17,7 +17,7 @@ public class UnboundedQueueTest {
     }
 
     @Test
-    public void testPushandPop() {
+    public void testAddAndRemove() {
         UnboundedQueue testQueue = new UnboundedQueue();
 
         testQueue.add(3);
@@ -25,7 +25,7 @@ public class UnboundedQueueTest {
     }
 
     @Test
-    public void testMultiPushandPop() {
+    public void testMultiAddAndRemove() {
         UnboundedQueue testQueue = new UnboundedQueue();
 
         testQueue.add(3);
@@ -53,5 +53,14 @@ public class UnboundedQueueTest {
         testQueue2.add(77);
         testQueue2.add("w7p");
         assertEquals("Expected '3' as the length of the queue.", 3, testQueue2.sizeOf());
+    }
+    
+    @Test
+    public void testIsEmpty() {
+        UnboundedQueue testQueue = new UnboundedQueue();
+        assertTrue("Queue should be empty.", testQueue.isEmpty());
+        
+        testQueue.add("Hello");
+        assertFalse("Queue should not be empty.", testQueue.isEmpty());
     }
 }

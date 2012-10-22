@@ -1,7 +1,8 @@
 package aber.ac.uk.dcs.cs21120.chs17.WordLadder.dataStructureTests;
 
-import org.junit.Test;
+import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * @author Chris Savill - chs17
@@ -9,6 +10,9 @@ import static org.junit.Assert.*;
  */
 public class GraphTest {
     
-    public GraphTest() {
+    @Test
+    public void testConstructor() {
+        Graph testGraph = new Graph();
+        assertEquals("Expected '0' from the hash table.", 0, testGraph.getGraphHash().size());
     }
 }

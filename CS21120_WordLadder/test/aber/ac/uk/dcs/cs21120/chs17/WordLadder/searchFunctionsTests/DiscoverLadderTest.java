@@ -1,7 +1,9 @@
 package aber.ac.uk.dcs.cs21120.chs17.WordLadder.searchFunctionsTests;
 
-import org.junit.Test;
+import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
+import aber.dcs.cs21120.chs17.WordLadder.searchFunctions.DiscoverLadder;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * @author Chris Savill - chs17
@@ -9,6 +11,11 @@ import static org.junit.Assert.*;
  */
 public class DiscoverLadderTest {
     
-    public DiscoverLadderTest() {
+    @Test
+    public void testBreadthFirstSearchForDiscovery() {
+        Graph testGraph = new Graph();
+        DiscoverLadder testLadder = new DiscoverLadder(testGraph);
+        
+        assertTrue("Ladder should be found between 'head' and 'foot'", testLadder.discoverLadder());
     }
 }
