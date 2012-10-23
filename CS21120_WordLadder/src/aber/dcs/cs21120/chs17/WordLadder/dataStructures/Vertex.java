@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /**
  * @author Chris Savill - chs17
- * @title CS21120 WordLadder class to represent a vertex/node for use within the
+ * CS21120 WordLadder class to represent a vertex/node for use within the
  * graph
  */
 public class Vertex {

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Chris Savill - chs17
- * @title Class that contains various methods to read words from a file
+ * Class that contains various methods to read words from a file
  */
 public class WordReader {
 

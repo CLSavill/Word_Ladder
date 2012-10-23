@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @author Chris Savill - chs17
- * @title CS21120 WordLadder class that represents a graph data structure
+ * CS21120 WordLadder class that represents a graph data structure
  */
 public class Graph {
     //////////////////////// Variables ///////////////////////////
