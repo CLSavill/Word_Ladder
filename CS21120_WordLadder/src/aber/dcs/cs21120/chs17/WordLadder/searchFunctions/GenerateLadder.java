@@ -41,7 +41,7 @@ public class GenerateLadder {
      * @return Returns True or false based on whether the goal state has been
      * found.
      */
-    public boolean recursiveDepthLimitedSearchForGeneration(Vertex currentVertex, int currentDepth, int depthLimit) {
+    public boolean depthLimitedSearch(Vertex currentVertex, int currentDepth, int depthLimit) {
         if (currentVertex.getDistanceFromStartVertex() < 0) {
             currentVertex.setDistanceFromStartVertex(currentDepth);
         }
@@ -56,7 +56,7 @@ public class GenerateLadder {
                 for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
                     if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) {
                         graph.getGraphHash().get(neighbour).setPredecessor(currentVertex.getWord()); //Sets the predecesor/parent vertex of the neighbour/chile vertex to the current vertex
-                        resultFound = recursiveDepthLimitedSearchForGeneration(graph.getGraphHash().get(neighbour), currentDepth + 1, depthLimit);
+                        resultFound = depthLimitedSearch(graph.getGraphHash().get(neighbour), currentDepth + 1, depthLimit);
                         if (resultFound == true) {
                             return true;
                         }

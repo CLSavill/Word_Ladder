@@ -22,9 +22,9 @@ public abstract class LadderCycler {
      */
     protected Graph graph;
     /**
-     * GraphBuilder class used to build the graphs
+     * WordReader class used for reading in words from a data file
      */
-    protected GraphBuilder graphBuilder;
+    protected WordReader reader;
     /**
      * LinkedList of type String used to store all the words read in by the
      * WordReader class
@@ -45,8 +45,13 @@ public abstract class LadderCycler {
      */
     protected String endWord;
     /**
-     * Stack class used for storing the resulting words in the word ladder
+     * boolean primitive used to determine whether or not the start word is
+     * present in the data file being scanned
      */
+    protected boolean startWordPresent = false;
+    /**
+     * Stack class used for storing the resulting words in the word ladder
+     */ 
     protected UnboundedStack resultStack;
 
     //////////////////////// Constructors ///////////////////////////
@@ -55,7 +60,7 @@ public abstract class LadderCycler {
      */
     public LadderCycler() {
         graph = new Graph();
-        graphBuilder = new GraphBuilder(graph);
+        reader = new WordReader();
         wordList = new LinkedList();
         resultStack = new UnboundedStack();
     }
@@ -81,6 +86,15 @@ public abstract class LadderCycler {
         return wordPresent;
     }
 
+    /**
+     * Method to set the endWord
+     *
+     * @param startWord The end word
+     */
+    public void setStartWord(String startWord) {
+        this.startWord = startWord;
+    }
+    
     /**
      * Method to set the endWord
      *

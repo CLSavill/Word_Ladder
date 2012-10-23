@@ -10,32 +10,29 @@ public class DiscoveryCycler extends LadderCycler {
     //////////////////////// Variables ///////////////////////////
 
     /**
-     * boolean primitive used to store whether or not the start word is present in the data file being scanned
-     */
-    private boolean startWordPresent = false;
-    /**
-     * boolean primitive used to store whether or not the end word is present in the data file being scanned
+     * boolean primitive used to store whether or not the end word is present in
+     * the data file being scanned
      */
     private boolean endWordPresent = false;
     /**
-     * DiscoverLadder class used to provide access to the search algorithm to discover the word ladder
+     * DiscoverLadder class used to provide access to the search algorithm to
+     * discover the word ladder
      */
     private DiscoverLadder discoverLadder;
-    
-    //////////////////////// Methods ///////////////////////////
 
+    //////////////////////// Methods ///////////////////////////
     /**
      * Method that sets off the word ladder discovery cycle, first by calling a
      * method that gets the words to ladder between from the user, then calls a
      * method that creates a new graph, then calls the search algorithm,
      * evaluates its result and acts accordingly
      */
-    public void discoveryGraphSetupCycle() {
+    public void discoveryCycle() {
         getUserInputForDiscovery();
-        graphBuilder.createGraph(wordList);
+        graph.createGraph(wordList);
         discoverLadder = new DiscoverLadder(graph, this);
 
-        if (discoverLadder.breadthFirstSearchForDiscovery(graph.getGraphHash().get(startWord), graph.getGraphHash().get(endWord), 0) == true) { //Evaluates the result of the iterativeDeepeningSearchForDiscovery method
+        if (discoverLadder.breadthFirstSearch(graph.getGraphHash().get(startWord), graph.getGraphHash().get(endWord), 0) == true) { //Evaluates the result of the iterativeDeepeningSearchForDiscovery method
             storeWordLadder(endWord);
             printLadder(resultStack);
         } else {
@@ -49,13 +46,12 @@ public class DiscoveryCycler extends LadderCycler {
      * supplied
      */
     private void getUserInputForDiscovery() {
-        WordReader reader = new WordReader();
         while (startWordPresent == false) {
             startWord = "WordTooLong"; //"WordTooLong" used as it has more than 7 letters and to initialise word ready for while loop condition checking
             endWord = "WordTooLong";
             while (startWord.length() > maxWordLength) {
                 System.out.println("Please enter in a start word from which the word ladder will start from (no more than 7 letters): ");
-                startWord = input.next();
+                setStartWord(input.next());
             }
 
             wordList = reader.readWords(startWord.length());
@@ -70,7 +66,7 @@ public class DiscoveryCycler extends LadderCycler {
         while (endWordPresent == false) {
             while (endWord.length() != startWord.length()) {
                 System.out.println("Please enter in the target word to ladder to (same length as the start word): ");
-                endWord = input.next();
+                setEndWord(input.next());
             }
 
             if (checkWordPresent(wordList, endWord) == true) { //Evaluates if the word chosen exists in the appropriate word data file

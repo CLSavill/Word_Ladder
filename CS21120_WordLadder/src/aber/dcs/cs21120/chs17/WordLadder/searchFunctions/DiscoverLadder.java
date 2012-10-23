@@ -37,7 +37,7 @@ public class DiscoverLadder {
      * @param currentDepth The current depth in the graph
      * @return Returns true if word ladder has been found, false if not
      */
-    public boolean breadthFirstSearchForDiscovery(Vertex currentVertex, Vertex endVertex, int currentDepth) {
+    public boolean breadthFirstSearch(Vertex currentVertex, Vertex endVertex, int currentDepth) {
         UnboundedQueue frontier = new UnboundedQueue();
         currentVertex.setDistanceFromStartVertex(currentDepth); //Sets distance from start vertex to the current depth, if it is the start vertex, distance would be 0
         frontier.add(currentVertex.getWord()); //Adds the current vertex to the queue

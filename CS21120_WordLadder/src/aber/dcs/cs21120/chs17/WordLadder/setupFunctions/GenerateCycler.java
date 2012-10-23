@@ -14,11 +14,6 @@ public class GenerateCycler extends LadderCycler {
      */
     private int stepsInLadder = 0;
     /**
-     * boolean primitive used to determine whether or not the start word is
-     * present in the data file being scanned
-     */
-    private boolean startWordPresent = false;
-    /**
      * GenerateLadder class used to provide access to the search algorithm to
      * generate the word ladder
      */
@@ -31,12 +26,12 @@ public class GenerateCycler extends LadderCycler {
      * that creates a new graph, then calls the search algorithm, evaluates its
      * result and acts accordingly
      */
-    public void generateGraphSetupCycle() {
+    public void generateCycle() {
         getUserInputForGeneration();
-        graphBuilder.createGraph(wordList);
+        graph.createGraph(wordList);
         generateLadder = new GenerateLadder(graph, this);
 
-        if (generateLadder.recursiveDepthLimitedSearchForGeneration(graph.getGraphHash().get(startWord), 0, stepsInLadder - 1) == true) { //Evaluates the result of the recursiveDepthLimitedSearchForGeneration method
+        if (generateLadder.depthLimitedSearch(graph.getGraphHash().get(startWord), 0, stepsInLadder - 1) == true) { //Evaluates the result of the recursiveDepthLimitedSearchForGeneration method
             storeWordLadder(endWord);
             printLadder(resultStack);
         } else {
@@ -50,12 +45,11 @@ public class GenerateCycler extends LadderCycler {
      * and then gets the user to input the number of steps the want to ladder
      */
     private void getUserInputForGeneration() {
-        WordReader reader = new WordReader();
         while (startWordPresent == false) {
             startWord = "WordTooLong"; //"WordTooLong" used as it has more than 7 letters and to initialise word ready for while loop condition checking
             while (startWord.length() > maxWordLength) {
                 System.out.println("Please enter in a word to generate a word ladder for (no more than 7 letters): ");
-                startWord = input.next();
+                setStartWord(input.next());
             }
 
             wordList = reader.readWords(startWord.length());
@@ -73,6 +67,15 @@ public class GenerateCycler extends LadderCycler {
             input.next();
         }
 
-        stepsInLadder = input.nextInt();
+        setStepsInLadder(input.nextInt());
+    }
+    
+    /**
+     * Method to set the endWord
+     *
+     * @param startWord The end word
+     */
+    public void setStepsInLadder(int stepsInLadder) {
+        this.stepsInLadder = stepsInLadder;
     }
 }
