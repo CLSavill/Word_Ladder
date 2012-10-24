@@ -5,7 +5,7 @@ import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Vertex;
 import aber.dcs.cs21120.chs17.WordLadder.searchFunctions.DiscoverLadder;
 import aber.dcs.cs21120.chs17.WordLadder.wordLadderFunctions.DiscoveryCycler;
 import aber.dcs.cs21120.chs17.WordLadder.setupFunctions.GraphBuilder;
-import aber.dcs.cs21120.chs17.WordLadder.wordLadderFunctions.WordReader;
+import aber.dcs.cs21120.chs17.WordLadder.dataStructures.WordReader;
 import java.util.LinkedList;
 import static org.junit.Assert.*;
 import org.junit.Test;

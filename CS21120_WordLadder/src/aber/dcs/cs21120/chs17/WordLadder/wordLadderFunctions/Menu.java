@@ -1,5 +1,6 @@
 package aber.dcs.cs21120.chs17.WordLadder.wordLadderFunctions;
 
+import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
 import java.util.Scanner;
 
 /**
@@ -12,10 +13,8 @@ public class Menu {
      * Method to launch a menu
      */
     public void initialiseMenu() {
-
+        Graph graph;
         int menuChoice = 0;
-        GenerateCycler generateCycler;
-        DiscoveryCycler discoveryCycler;
         Scanner input = new Scanner(System.in);
 
         System.out.println(
@@ -38,12 +37,12 @@ public class Menu {
 
             switch (menuChoice) {
                 case 1:
-                    generateCycler = new GenerateCycler();
-                    generateCycler.generateCycle();
+                    graph = new Graph();
+                    graph.generateCycle();
                     break;
                 case 2:
-                    discoveryCycler = new DiscoveryCycler();
-                    discoveryCycler.discoveryCycle();
+                    graph = new Graph();
+                    graph.discoveryCycle();
                     break;
                 case 3:
                     System.out.println("Exiting WordLadder...");
