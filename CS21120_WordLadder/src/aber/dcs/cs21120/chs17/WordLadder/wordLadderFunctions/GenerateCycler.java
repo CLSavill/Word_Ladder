@@ -96,7 +96,7 @@ public class GenerateCycler extends LadderCycler {
             } else {
                 for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
                     if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) {
-                        graph.getGraphHash().get(neighbour).setPredecessor(currentVertex.getWord()); //Sets the predecesor/parent vertex of the neighbour/chile vertex to the current vertex
+                        graph.getGraphHash().get(neighbour).setPredecessor(currentVertex.getWord()); //Sets the predecessor/parent vertex of the neighbour/child vertex to the current vertex
                         resultFound = depthLimitedSearch(graph.getGraphHash().get(neighbour), currentDepth + 1, depthLimit);
                         if (resultFound == true) {
                             return true;

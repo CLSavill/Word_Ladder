@@ -8,8 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author Chris Savill - chs17
- * Class that contains various methods to read words from a file
+ * @author Chris Savill - chs17 Class that contains various methods to read
+ * words from a file
  */
 public class WordReader {
 
