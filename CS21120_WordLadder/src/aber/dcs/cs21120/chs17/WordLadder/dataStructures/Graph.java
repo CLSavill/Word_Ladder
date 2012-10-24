@@ -56,24 +56,9 @@ public class Graph {
      */
     private boolean startWordPresent = false;
     /**
-     * boolean primitive used to store whether or not the end word is present in
-     * the data file being scanned
-     */
-    private boolean endWordPresent = false;
-    /**
-     * int primitive used to store the number of steps in the ladder to generate
-     */
-    private int stepsInLadder = 0;
-    /**
-     * boolean primitive used to determine whether or not the result has been
-     * found
-     */
-    private boolean resultFound = false;
-    /**
      * Stack class used for storing the resulting words in the word ladder
      */
     private Stack resultStack;
-    private LinkedList<String> frontierQueue;
 
     //////////////////////// Constructors ///////////////////////////
     /**
@@ -176,23 +161,24 @@ public class Graph {
      * result and acts accordingly
      */
     public void generateCycle() {
-        getUserInputForGeneration();
+        int ladderDepth = 0;
+        ladderDepth = getUserInputForGeneration();
         createGraph();
 
-        if (depthLimitedSearch(graphHash.get(startWord), 0, stepsInLadder - 1) == true) { //Evaluates the result of the recursiveDepthLimitedSearchForGeneration method
+        if (depthLimitedSearch(graphHash.get(startWord), 0, ladderDepth - 1) == true) { //Evaluates the result of the recursiveDepthLimitedSearchForGeneration method
             storeWordLadder();
             printLadder();
         } else {
-            System.out.println("Sorry no complete word ladder for '" + startWord + "' with '" + stepsInLadder + "' steps in the ladder.");
+            System.out.println("Sorry no complete word ladder for '" + startWord + "' with '" + ladderDepth + "' ladder depth.");
         }
     }    
     
     /**
      * Method that cycles through getting the user to input a valid word for the
      * word ladder generation and checks if it exists in the data files supplied
-     * and then gets the user to input the number of steps the want to ladder
+     * and then gets the user to input the depth of the ladder they want
      */
-    private void getUserInputForGeneration() {
+    private int getUserInputForGeneration() {
         while (startWordPresent == false) {
             startWord = "WordTooLong"; //"WordTooLong" used as it has more than 7 letters and to initialise word ready for while loop condition checking
             while (startWord.length() > maxWordLength) {
@@ -215,7 +201,7 @@ public class Graph {
             input.next();
         }
 
-        stepsInLadder = input.nextInt();
+        return input.nextInt();    
     }
 
     /**
@@ -232,6 +218,7 @@ public class Graph {
      * found.
      */
     private boolean depthLimitedSearch(Vertex currentVertex, int currentDepth, int depthLimit) {
+        boolean resultFound = false;
         if (currentVertex.getDistanceFromStartVertex() < 0) {
             currentVertex.setDistanceFromStartVertex(currentDepth);
         }
@@ -281,6 +268,8 @@ public class Graph {
      * supplied
      */
     private void getUserInputForDiscovery() {
+        boolean endWordPresent = false;
+        
         while (startWordPresent == false) {
             startWord = "WordTooLong"; //"WordTooLong" used as it has more than 7 letters and to initialise word ready for while loop condition checking
             endWord = "WordTooLong";
@@ -299,7 +288,7 @@ public class Graph {
         }
 
         while (endWordPresent == false) {
-            while (endWord.length() != startWord.length()) {
+            while (endWord.length() != startWord.length()) {                
                 System.out.println("Please enter in the target word to ladder to (same length as the start word): ");
                 endWord = input.next();
             }
@@ -307,6 +296,7 @@ public class Graph {
             if (checkWordPresent(wordList, endWord) == true) { //Evaluates if the word chosen exists in the appropriate word data file
                 endWordPresent = true;
             } else {
+                endWord = "WordTooLong";
                 System.out.println("Target word is not present in file, please try another word.");
             }
         }
@@ -322,7 +312,7 @@ public class Graph {
      * @return Returns true if word ladder has been found, false if not
      */
     private boolean breadthFirstSearch(Vertex currentVertex, Vertex endVertex, int currentDepth) {
-        frontierQueue = new LinkedList<String>();
+        LinkedList<String> frontierQueue = new LinkedList<String>();
         currentVertex.setDistanceFromStartVertex(currentDepth); //Sets distance from start vertex to the current depth, if it is the start vertex, distance would be 0
         frontierQueue.add(currentVertex.getWord()); //Adds the current vertex to the queue
 
