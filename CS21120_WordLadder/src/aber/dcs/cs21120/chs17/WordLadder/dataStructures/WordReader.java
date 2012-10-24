@@ -8,8 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author Chris Savill - chs17 Class that contains various methods to read
- * words from a file
+ * Class that contains various methods to read words from a file
+ *
+ * @author Chris Savill - chs17
  */
 public class WordReader {
 
@@ -39,6 +40,7 @@ public class WordReader {
 
         } catch (IOException ex) {
             Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("File could not be accessed.");
         }
 
         try {

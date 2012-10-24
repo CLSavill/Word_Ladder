@@ -8,8 +8,10 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * @author Chris Savill - chs17 CS21120 WordLadder class that represents a graph
- * data structure
+ * CS21120 WordLadder class that contains methods to create a graph and traverse
+ * the graph to find word ladders
+ *
+ * @author Chris Savill - chs17
  */
 public class Graph {
     //////////////////////// Variables ///////////////////////////
@@ -71,7 +73,6 @@ public class Graph {
     }
 
     //////////////////////// Methods ///////////////////////////
-
     /**
      * Method that returns the iterator for the hash table
      *
@@ -171,8 +172,8 @@ public class Graph {
         } else {
             System.out.println("Sorry no complete word ladder for '" + startWord + "' with '" + ladderDepth + "' ladder depth.");
         }
-    }    
-    
+    }
+
     /**
      * Method that cycles through getting the user to input a valid word for the
      * word ladder generation and checks if it exists in the data files supplied
@@ -201,7 +202,7 @@ public class Graph {
             input.next();
         }
 
-        return input.nextInt();    
+        return input.nextInt();
     }
 
     /**
@@ -269,7 +270,7 @@ public class Graph {
      */
     private void getUserInputForDiscovery() {
         boolean endWordPresent = false;
-        
+
         while (startWordPresent == false) {
             startWord = "WordTooLong"; //"WordTooLong" used as it has more than 7 letters and to initialise word ready for while loop condition checking
             endWord = "WordTooLong";
@@ -288,7 +289,7 @@ public class Graph {
         }
 
         while (endWordPresent == false) {
-            while (endWord.length() != startWord.length()) {                
+            while (endWord.length() != startWord.length()) {
                 System.out.println("Please enter in the target word to ladder to (same length as the start word): ");
                 endWord = input.next();
             }

@@ -24,7 +24,7 @@ public class VertexTest {
     }
     
     @Test
-    public void testAddandGetNeighbour() {
+    public void testAddAndGetNeighbour() {
         Vertex testVertex = new Vertex("Hello");
         testVertex.addNeighbour("Bye");
         assertEquals("Expected 'Bye' as a neighbour of the vertex.", "Bye", testVertex.getNeighbours().get(0));

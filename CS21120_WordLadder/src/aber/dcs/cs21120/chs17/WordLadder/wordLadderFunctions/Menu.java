@@ -4,7 +4,9 @@ import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
 import java.util.Scanner;
 
 /**
- * @author Chris Savill - chs17 CS21120 WordLadder menu launcher class
+ * CS21120 WordLadder menu launcher class
+ *
+ * @author Chris Savill - chs17
  */
 public class Menu {
     //////////////////////// Methods ///////////////////////////

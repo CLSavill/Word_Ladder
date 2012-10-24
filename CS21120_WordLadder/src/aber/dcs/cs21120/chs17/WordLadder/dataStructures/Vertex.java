@@ -3,8 +3,9 @@ package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
 import java.util.LinkedList;
 
 /**
- * @author Chris Savill - chs17 CS21120 WordLadder class to represent a
- * vertex/node for use within the graph
+ * CS21120 WordLadder class to represent a vertex/node for use within the graph
+ *
+ * @author Chris Savill - chs17
  */
 public class Vertex {
     //////////////////////// Variables ///////////////////////////
