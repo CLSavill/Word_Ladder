@@ -1,4 +1,4 @@
-package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
+package aber.dcs.cs21120.chs17.WordLadder.wordLadderFunctions;
 
 /**
  * @author Chris Savill - chs17 CS21120 WordLadder project main class

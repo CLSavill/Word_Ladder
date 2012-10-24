@@ -1,6 +1,6 @@
-package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
+package aber.dcs.cs21120.chs17.WordLadder.wordLadderFunctions;
 
-import aber.dcs.cs21120.chs17.WordLadder.searchFunctions.GenerateLadder;
+import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Vertex;
 
 /**
  * @author Chris Savill - chs17 CS21120 WordLadder class to cycle through the
@@ -14,10 +14,10 @@ public class GenerateCycler extends LadderCycler {
      */
     private int stepsInLadder = 0;
     /**
-     * GenerateLadder class used to provide access to the search algorithm to
-     * generate the word ladder
+     * boolean primitive used to determine whether or not the result has been
+     * found
      */
-    private GenerateLadder generateLadder;
+    private boolean resultFound = false;
 
     //////////////////////// Methods ///////////////////////////
     /**
@@ -29,9 +29,8 @@ public class GenerateCycler extends LadderCycler {
     public void generateCycle() {
         getUserInputForGeneration();
         graph.createGraph(wordList);
-        generateLadder = new GenerateLadder(graph, this);
 
-        if (generateLadder.depthLimitedSearch(graph.getGraphHash().get(startWord), 0, stepsInLadder - 1) == true) { //Evaluates the result of the recursiveDepthLimitedSearchForGeneration method
+        if (depthLimitedSearch(graph.getGraphHash().get(startWord), 0, stepsInLadder - 1) == true) { //Evaluates the result of the recursiveDepthLimitedSearchForGeneration method
             storeWordLadder(endWord);
             printLadder(resultStack);
         } else {
@@ -49,7 +48,7 @@ public class GenerateCycler extends LadderCycler {
             startWord = "WordTooLong"; //"WordTooLong" used as it has more than 7 letters and to initialise word ready for while loop condition checking
             while (startWord.length() > maxWordLength) {
                 System.out.println("Please enter in a word to generate a word ladder for (no more than 7 letters): ");
-                setStartWord(input.next());
+                startWord = input.next();
             }
 
             wordList = reader.readWords(startWord.length());
@@ -67,15 +66,45 @@ public class GenerateCycler extends LadderCycler {
             input.next();
         }
 
-        setStepsInLadder(input.nextInt());
+        stepsInLadder = input.nextInt();
     }
-    
+
     /**
-     * Method to set the endWord
+     * Depth-Limited Search (DLS) algorithm to find the word ladder for a word
+     * up to a certain depth
      *
-     * @param startWord The end word
+     * @param currentVertex The current vertex being evaluated to see if goal
+     * state has been met.
+     * @param currentDepth The current depth at which the current vertex lies
+     * at.
+     * @param depthLimit The maximum depth that the search will go to; the goal
+     * state
+     * @return Returns True or false based on whether the goal state has been
+     * found.
      */
-    public void setStepsInLadder(int stepsInLadder) {
-        this.stepsInLadder = stepsInLadder;
+    private boolean depthLimitedSearch(Vertex currentVertex, int currentDepth, int depthLimit) {
+        if (currentVertex.getDistanceFromStartVertex() < 0) {
+            currentVertex.setDistanceFromStartVertex(currentDepth);
+        }
+
+        if (currentVertex.getDistanceFromStartVertex() > currentDepth) {
+            return false;
+        } else {
+            if (currentVertex.getDistanceFromStartVertex() == depthLimit) {
+                endWord = currentVertex.getWord();
+                return true;
+            } else {
+                for (String neighbour : graph.getGraphHash().get(currentVertex.getWord()).getNeighbours()) {
+                    if (graph.getGraphHash().get(neighbour).getDistanceFromStartVertex() < 0) {
+                        graph.getGraphHash().get(neighbour).setPredecessor(currentVertex.getWord()); //Sets the predecesor/parent vertex of the neighbour/chile vertex to the current vertex
+                        resultFound = depthLimitedSearch(graph.getGraphHash().get(neighbour), currentDepth + 1, depthLimit);
+                        if (resultFound == true) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

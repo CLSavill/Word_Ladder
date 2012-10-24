@@ -3,9 +3,8 @@ package aber.dcs.cs21120.chs17.WordLadder.dataStructures;
 import java.util.LinkedList;
 
 /**
- * @author Chris Savill - chs17
- * CS21120 WordLadder class to represent a vertex/node for use within the
- * graph
+ * @author Chris Savill - chs17 CS21120 WordLadder class to represent a
+ * vertex/node for use within the graph
  */
 public class Vertex {
     //////////////////////// Variables ///////////////////////////
@@ -15,8 +14,8 @@ public class Vertex {
      */
     private String word;
     /**
-     * int primitive used to store the distance of the vertex from the current
-     * vertex. Defaults to -1 to represent that the vertex is unexplored
+     * int primitive used to store the distance of the vertex from the start
+     * vertex, defaults to -1 to represent that the vertex is unexplored
      */
     private int distanceFromStartVertex = -1;
     /**

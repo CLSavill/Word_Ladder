@@ -1,4 +1,4 @@
-package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
+package aber.dcs.cs21120.chs17.WordLadder.wordLadderFunctions;
 
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.Graph;
 import aber.dcs.cs21120.chs17.WordLadder.dataStructures.UnboundedStack;
@@ -84,24 +84,6 @@ public abstract class LadderCycler {
             }
         }
         return wordPresent;
-    }
-
-    /**
-     * Method to set the endWord
-     *
-     * @param startWord The end word
-     */
-    public void setStartWord(String startWord) {
-        this.startWord = startWord;
-    }
-    
-    /**
-     * Method to set the endWord
-     *
-     * @param endWord The end word
-     */
-    public void setEndWord(String endWord) {
-        this.endWord = endWord;
     }
 
     /**

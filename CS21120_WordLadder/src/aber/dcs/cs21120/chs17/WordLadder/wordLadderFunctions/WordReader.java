@@ -1,4 +1,4 @@
-package aber.dcs.cs21120.chs17.WordLadder.setupFunctions;
+package aber.dcs.cs21120.chs17.WordLadder.wordLadderFunctions;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
