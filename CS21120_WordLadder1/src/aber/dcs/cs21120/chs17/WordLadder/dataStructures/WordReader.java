@@ -45,12 +45,15 @@ public class WordReader {
 
         try {
             BufferedReader fileToBeRead = new BufferedReader(new FileReader("WordsOfLength" + wordLength + ".dat"));
-            LinkedList<String> wordStore = new LinkedList();
+            LinkedList<String> wordStore = new LinkedList<String>();
 
             for (int counter = 0; counter < numberOfWords; counter++) {
                 if (numberOfRelevantWords == 0) {
                     try {
-                        wordStore.add(fileToBeRead.readLine()); //Adds new word to the word store LinkedList
+                    	wordRead = fileToBeRead.readLine();
+                    	if (wordRead.length() == wordLength) {
+                        wordStore.add(wordRead); //Adds new word to the word store LinkedList
+                    	}
                     } catch (IOException ex) {
                         Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -58,16 +61,18 @@ public class WordReader {
                     wordAlreadyStored = false;
                     try {
                         wordRead = fileToBeRead.readLine();
-
-                        for (int counter2 = 0; counter2 < numberOfRelevantWords || wordAlreadyStored == true; counter2++) {
-                            if (wordStore.get(counter2).equals(wordRead)) { //Evaluates if word is already contained in the word store LinkedList
-                                wordAlreadyStored = true;
+                        if (wordRead.length() == wordLength){
+                        	for (int counter2 = 0; counter2 < numberOfRelevantWords || wordAlreadyStored == true; counter2++) {
+                                
+                            	if (wordStore.get(counter2).equals(wordRead)) { //Evaluates if word is already contained in the word store LinkedList
+                                    wordAlreadyStored = true;
+                                }
                             }
-                        }
-                        if (wordAlreadyStored == false) {
-                            wordStore.add(wordRead);
-                            numberOfRelevantWords++;
-                        }
+                            if (wordAlreadyStored == false) {
+                                wordStore.add(wordRead);
+                                numberOfRelevantWords++;
+                            }
+                        }         
                     } catch (IOException ex) {
                         Logger.getLogger(WordReader.class.getName()).log(Level.SEVERE, null, ex);
                     }
